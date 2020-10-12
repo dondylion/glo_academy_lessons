@@ -1,7 +1,5 @@
-// Задание второе усложнённое
-
-let num = 266219;
-let result = 1;
+let num = 266219, 
+    result = 1;
 
 num = num.toString();
 num = num.split('');
