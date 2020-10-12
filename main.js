@@ -9,7 +9,8 @@ let money = 60000,
  expenses2,
  amount1,
  amount2,
- budgetMonth;
+ budgetMonth,
+ messageToYou;
 
 addExpenses = addExpenses.toLowerCase();
 addExpenses = addExpenses.split(',');
@@ -29,13 +30,13 @@ budgetDay = budgetMonth/30;
 budgetDay = Math.floor(budgetDay);
 
 if (budgetDay<0) {
-    console.log('Что-то пошло не так');
+    messageToYou = 'Что-то пошло не так';
 } else if (0<=budgetDay<600) {
-    console.log('К сожалению, у вас уровень дохода ниже среднего');
+    messageToYou = 'К сожалению, у вас уровень дохода ниже среднего';
 } else if (600<=budgetDay<1200) {
-    console.log('У вас средний уровень дохода');
+    messageToYou = 'У вас средний уровень дохода';
 } else if (budgetDay>=1200) {
-    console.log('У вас высокий уровень дохода');
+    messageToYou = 'У вас высокий уровень дохода';
 }
 
 console.log(addExpenses);
@@ -45,8 +46,9 @@ console.log(typeof(period));
 console.log('Длина строки addExpenses: ', addExpenses.length);
 console.log('Период равен ', period, ' месяцев');
 console.log('Цель: заработать ', mission, ' рублей');
-console.log(budgetMonth);
-console.log(period);
-console.log(budgetDay);
+console.log('Бюджет на месяц ', budgetMonth);
+console.log('Месяцев для достижения цели: ', period);
+console.log('Бюджет на день: ', budgetDay);
+console.log(messageToYou);
 
 
