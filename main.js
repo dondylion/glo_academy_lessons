@@ -1,32 +1,56 @@
-let money = prompt('Ваш месячный доход?'), 
+let isNumber = function(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+let money, 
  income = 'Фриланс', 
- addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'), 
+ addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'кино, бар'), 
  deposit = confirm('Есть ли у вас депозит в банке?'),
  mission = 150000,  
- expenses1 = prompt('Введите обязательную строку расходов'),
- amount1 = prompt('Во сколько это обойдётся?'),
- expenses2 = prompt('Введите обязательную строку расходов'),
- amount2 = prompt('Во сколько это обойдётся?'),
+ expenses = [],
+ amount = [],
  budgetDay,
  messageToYou,
  accumulatedMonth;
 
-const getExpensesMonth = function() {
-    return amount1*1 + amount2*1;
+let start = function() {
+    do {
+        money = prompt('Ваш месячный доход?');
+    } while (!isNumber(money));
 };
 
+start();
+
+const getExpensesMonth = function() {
+    let sum = 0;
+    for (let i=0;i<2;i++){
+        expenses[i] = prompt('Введите обязательную строку расходов', 'Садик государственный');
+        do {
+            amount[i] = prompt('Во сколько это обойдётся?');
+        } while (!isNumber(amount[i]));
+        sum += amount[i];
+    }
+    return sum;
+};
+
+let expensesAmount = getExpensesMonth();
+
 const getAccumulatedMonth = function() {
-    return money - getExpensesMonth();
+    return money - expensesAmount;
 };
 
 const getTargetMonth = function() {
-    return Math.ceil(mission/accumulatedMonth);
+    let period = Math.ceil(mission/accumulatedMonth);
+    if (period>0) {
+        return 'Месяцев до достижения цели: ' + period;
+    } else {
+        return 'Цель не будет достигнута';
+    }
 };
 
 const showTypeOf = function() {
     console.log(typeof(money));
     console.log(typeof(mission));
-    console.log(typeof(period));
 };
 
 const getStatusIncome = function() {
@@ -48,11 +72,9 @@ budgetDay = Math.floor(accumulatedMonth/30);
 addExpenses = addExpenses.toLowerCase();
 addExpenses = addExpenses.split(',');
 
-console.log('Расходы за месяц ', getExpensesMonth());
+console.log('Расходы за месяц ', expensesAmount);
 console.log('Возможные расходы: ', addExpenses);
-console.log('Месяцев до достижения цели: ', getTargetMonth());
+console.log(getTargetMonth());
 console.log('Бюджет на день ', budgetDay);
 getStatusIncome();
 showTypeOf();
-
-
