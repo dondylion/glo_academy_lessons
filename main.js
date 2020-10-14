@@ -7,7 +7,6 @@ let money = prompt('Ваш месячный доход?'),
  amount1 = prompt('Во сколько это обойдётся?'),
  expenses2 = prompt('Введите обязательную строку расходов'),
  amount2 = prompt('Во сколько это обойдётся?'),
- period,
  budgetDay,
  messageToYou,
  accumulatedMonth;
@@ -31,34 +30,28 @@ const showTypeOf = function() {
 };
 
 const getStatusIncome = function() {
-    console.log(income);
+    if (budgetDay<0) {
+        messageToYou = 'Что-то пошло не так';
+    } else if (budgetDay>=0 && budgetDay<600) {
+        messageToYou = 'К сожалению, у вас уровень дохода ниже среднего';
+    } else if (budgetDay<1200 && budgetDay>=600) {
+        messageToYou = 'У вас средний уровень дохода';
+    } else if (budgetDay>=1200) {
+        messageToYou = 'У вас высокий уровень дохода';
+    }
+    return console.log(messageToYou);
 };
 
 accumulatedMonth = getAccumulatedMonth();
-budgetDay = accumulatedMonth/30;
+budgetDay = Math.floor(accumulatedMonth/30);
 
 addExpenses = addExpenses.toLowerCase();
 addExpenses = addExpenses.split(',');
-
-period = Math.ceil(period);
-budgetDay = Math.floor(budgetDay);
-
-if (budgetDay<0) {
-    messageToYou = 'Что-то пошло не так';
-} else if (0<=budgetDay<600) {
-    messageToYou = 'К сожалению, у вас уровень дохода ниже среднего';
-} else if (600<=budgetDay<1200) {
-    messageToYou = 'У вас средний уровень дохода';
-} else if (budgetDay>=1200) {
-    messageToYou = 'У вас высокий уровень дохода';
-}
-
 
 console.log('Расходы за месяц ', getExpensesMonth());
 console.log('Возможные расходы: ', addExpenses);
 console.log('Месяцев до достижения цели: ', getTargetMonth());
 console.log('Бюджет на день ', budgetDay);
-console.log(messageToYou);
 getStatusIncome();
 showTypeOf();
 
