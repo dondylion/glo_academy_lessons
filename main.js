@@ -10,7 +10,6 @@ let money,
  expenses = [],
  amount = [],
  budgetDay,
- messageToYou,
  accumulatedMonth;
 
 let start = function() {
@@ -26,7 +25,7 @@ const getExpensesMonth = function() {
     for (let i=0;i<2;i++){
         expenses[i] = prompt('Введите обязательную строку расходов', 'Садик государственный');
         do {
-            amount[i] = prompt('Во сколько это обойдётся?');
+            amount[i] = prompt('Во сколько это обойдётся?') - 0;
         } while (!isNumber(amount[i]));
         sum += amount[i];
     }
@@ -48,22 +47,20 @@ const getTargetMonth = function() {
     }
 };
 
-const showTypeOf = function() {
-    console.log(typeof(money));
-    console.log(typeof(mission));
+const showTypeOf = function(a) {
+    return typeof(a);
 };
 
-const getStatusIncome = function() {
-    if (budgetDay<0) {
-        messageToYou = 'Что-то пошло не так';
-    } else if (budgetDay>=0 && budgetDay<600) {
-        messageToYou = 'К сожалению, у вас уровень дохода ниже среднего';
-    } else if (budgetDay<1200 && budgetDay>=600) {
-        messageToYou = 'У вас средний уровень дохода';
-    } else if (budgetDay>=1200) {
-        messageToYou = 'У вас высокий уровень дохода';
+const getStatusIncome = function(num) {
+    if (num<0) {
+        return 'Что-то пошло не так';
+    } else if (num>=0 && num<600) {
+        return 'К сожалению, у вас уровень дохода ниже среднего';
+    } else if (num<1200 && num>=600) {
+        return 'У вас средний уровень дохода';
+    } else if (num>=1200) {
+        return 'У вас высокий уровень дохода';
     }
-    return console.log(messageToYou);
 };
 
 accumulatedMonth = getAccumulatedMonth();
@@ -76,5 +73,6 @@ console.log('Расходы за месяц ', expensesAmount);
 console.log('Возможные расходы: ', addExpenses);
 console.log(getTargetMonth());
 console.log('Бюджет на день ', budgetDay);
-getStatusIncome();
-showTypeOf();
+console.log(getStatusIncome(budgetDay));
+console.log(showTypeOf(money));
+console.log(showTypeOf(mission));
