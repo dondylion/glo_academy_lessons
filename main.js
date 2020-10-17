@@ -2,9 +2,7 @@ let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-let money = 0,
-    amount = [],
-    expenses = [];
+let money = 0;
 
 let start = function() {
     do {
@@ -17,8 +15,7 @@ start();
 let appData = {
     income: {},
     addIncome: [],
-    expenses: [],
-    amount: [],
+    expenses: {},
     addExpenses: [],
     deposit: false,
     mission: 50000,
@@ -31,20 +28,17 @@ let appData = {
         appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'кино, бар'); 
         appData.addExpenses = appData.addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
-    },
-    getExpensesMonth : function() {
-        let sum = 0;
+        let keyExp = ''; //ключ для элемента объекта с расходами
         for (let i=0;i<2;i++){
-            expenses[i] = prompt('Введите обязательную строку расходов', 'Садик государственный');
+            keyExp = prompt('Введите обязательную строку расходов', 'Садик государственный');
             do {
-                amount[i] = prompt('Во сколько это обойдётся?') - 0;
-            } while (!isNumber(amount[i]));
-            sum += amount[i];
+                appData.expenses[keyExp] = prompt('Во сколько это обойдётся?') - 0;
+            } while (!isNumber(appData.expenses[keyExp]));
+            appData.expensesMonth += appData.expenses[keyExp];
         }
-        return sum;
     },
     getAccumulatedMonth : function() {
-        return appData.budget - expensesAmount;
+        return appData.budget - appData.expensesMonth;
     },
     getTargetMonth : function() {
         appData.period = Math.ceil(appData.mission/accumulatedMonth);
@@ -68,11 +62,10 @@ let appData = {
 };
 
 appData.asking();
-let expensesAmount = appData.getExpensesMonth();
 let accumulatedMonth = appData.getAccumulatedMonth();
 appData.budgetDay = Math.floor(accumulatedMonth/30);
 
-console.log('Расходы за месяц ', expensesAmount);
+console.log('Расходы за месяц ', appData.expensesMonth);
 console.log('Возможные расходы: ', appData.addExpenses);
 console.log(appData.getTargetMonth());
 console.log('Бюджет на день ', appData.budgetDay);
