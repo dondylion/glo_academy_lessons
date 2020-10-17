@@ -37,11 +37,12 @@ let appData = {
             appData.expensesMonth += appData.expenses[keyExp];
         }
     },
-    getAccumulatedMonth : function() {
-        return appData.budget - appData.expensesMonth;
+    getBudget : function() {
+        appData.budgetMonth =  appData.budget - appData.expensesMonth;
+        appData.budgetDay = Math.floor(appData.budgetMonth/30);
     },
     getTargetMonth : function() {
-        appData.period = Math.ceil(appData.mission/accumulatedMonth);
+        appData.period = Math.ceil(appData.mission/appData.budgetMonth);
         if (appData.period>0) {
             return 'Месяцев до достижения цели: ' + appData.period;
         } else {
@@ -62,11 +63,14 @@ let appData = {
 };
 
 appData.asking();
-let accumulatedMonth = appData.getAccumulatedMonth();
-appData.budgetDay = Math.floor(accumulatedMonth/30);
+appData.getBudget();
+appData.getStatusIncome();
 
 console.log('Расходы за месяц ', appData.expensesMonth);
-console.log('Возможные расходы: ', appData.addExpenses);
 console.log(appData.getTargetMonth());
-console.log('Бюджет на день ', appData.budgetDay);
 console.log(appData.getStatusIncome(appData.budgetDay));
+
+console.log('Наша программа включает в себя данные:');
+for (let k in appData) {
+    console.log(k, ' : ', appData[k]);
+}
