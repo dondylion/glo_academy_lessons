@@ -2,7 +2,19 @@
 
 //*********Урок №9**********
 
-
+const startButton = document.getElementById('start');
+const addExpButton = document.getElementsByTagName('button')[0];
+const addIncButton = document.getElementsByTagName('button')[1];
+const checkDeposit = document.querySelector('#deposit-check');
+const incomeItems = document.querySelectorAll('.additional_income-item');
+const amountItems = document.getElementsByClassName('result-total');
+const salaryAmount = document.querySelector('.salary-amount');
+const incomeTitle = document.querySelector('income-title');
+const incomeAmount = document.querySelector('income-amount');
+const expensesTitle = document.querySelector('expenses-title');
+const expenssAmount = document.querySelector('expenses-amount');
+const addExpItem = document.querySelector('additional_expenses-item');
+const targetAmount = document.querySelector('target-amount');
 
 //**************************
 
