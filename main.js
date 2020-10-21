@@ -1,3 +1,11 @@
+'use strict';
+
+//*********Урок №9**********
+
+
+
+//**************************
+
 let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -44,7 +52,7 @@ let appData = {
             appData.income[itemIncome] = cashIncome;
         }
 
-        appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'кино, бар'); 
+        appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'); 
         appData.addExpenses = appData.addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         let keyExp = ''; //ключ для элемента объекта с расходами
@@ -116,7 +124,7 @@ console.log('************ Задание восьмое ************');
 let newStr = '';
 for (let i in appData.addExpenses) {
     appData.addExpenses[i] = appData.addExpenses[i].trim();
-    if (i == 0) {
+    if (i === 0) {
         newStr += appData.addExpenses[i][0].toUpperCase() + appData.addExpenses[i].slice(1);
     } else {
         newStr += ', ' + appData.addExpenses[i][0].toUpperCase() + appData.addExpenses[i].slice(1);
