@@ -26,7 +26,8 @@ let myForm = document.querySelector('body'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     periodSelect = document.querySelector('.period-select'),
     periodAmount = document.querySelector('.period-amount'),
-    incomeItem = document.querySelectorAll('.income_items');
+    incomeItem = document.querySelectorAll('.income_items'),
+    income = document.querySelector('.income');
 
 startButton.disabled = true;
 
@@ -86,8 +87,38 @@ let appData = {
             inputs[i].disabled = false;
         }
 
+        if(incomeItems.length>=2) {
+            for (let i=1;i<incomeItems.length;i++) {
+            incomeItems[i].parentNode.removeChild(incomeItems[i]);
+            }
+            incomeItems = document.querySelectorAll('.income-items');
+        }
+
+        if(expensesItems.length>=2) {
+            for (let i=1;i<expensesItems.length;i++) {
+            expensesItems[i].parentNode.removeChild(expensesItems[i]);
+            }
+            expensesItems = document.querySelectorAll('.expenses-items');
+        }
+
+        expensesPlus.style.display = 'block';
+        incomePlus.style.display = 'block';
+        
         startButton.style.display = 'block';
         cancelButton.style.display = 'none';
+
+        appData.income =  {};
+        appData.addIncome =  [];
+        appData.expenses =  {};
+        appData.addExpenses =  [];
+        appData.deposit =  false;
+        appData.incomeMonth =  0;
+        appData.percentDeposit =  0;
+        appData.moneyDeposit =  0;
+        appData.budget =  0;
+        appData.budgetDay =  0;
+        appData.budgetMonth =  0;
+        appData.expensesMonth =  0;
     },
     disabledInputs: function() {
         startButton.style.display = 'none';
